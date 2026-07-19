@@ -1,9 +1,11 @@
+const fs = require('fs');
 const path = require('path');
 const { DatabaseSync } = require('node:sqlite');
 
-// In production (Docker/Railway) set DB_PATH to a mounted volume path e.g. /data/database.sqlite
-const dbPath = process.env.DB_PATH || path.join(__dirname, '..', 'database.sqlite');
+// Dynamically select DB path: /data/database.sqlite inside Docker/Railway, local path otherwise
+const dbPath = process.env.DB_PATH || (fs.existsSync('/data') ? '/data/database.sqlite' : path.join(__dirname, '..', 'database.sqlite'));
 const db = new DatabaseSync(dbPath);
+
 
 
 // Enable foreign keys
