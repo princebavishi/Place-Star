@@ -1,0 +1,62 @@
+
+services:
+  # ─── Backend ─────────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .                          # repo root — so Dockerfile can access ./charusat_internship_portal.sql
+      dockerfile: Backend/Dockerfile
+    container_name: placestar-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_PATH: /data/database.sqlite
+      JWT_SECRET: ${JWT_SECRET:-change_me_super_secret_key_123}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost}
+      EMAIL_SERVICE: ${EMAIL_SERVICE:-smtp.gmail.com}
+      EMAIL_PORT: ${EMAIL_PORT:-587}
+      EMAIL_USER: ${EMAIL_USER:-}
+      EMAIL_PASS: ${EMAIL_PASS:-}
+    volumes:
+      - sqlite_data:/data
+    networks:
+      - placestar
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # ─── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_DB_HOST: localhost
+    container_name: placestar-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - placestar
+    healthcheck:
+      test: ["CMD", "sh", "-c", "nc -z localhost 80 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+# ─── Volumes ─────────────────────────────────────────────────────────────────
+volumes:
+  sqlite_data:
+    driver: local
+
+# ─── Network ─────────────────────────────────────────────────────────────────
+networks:
+  placestar:
+    driver: bridge

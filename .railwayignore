@@ -1,0 +1,7 @@
+# Files/directories to exclude from Railway deployments
+node_modules/
+*.sqlite
+.env
+.env.local
+.DS_Store
+.git/

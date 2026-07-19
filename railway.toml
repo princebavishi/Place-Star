@@ -1,0 +1,11 @@
+# Railway project configuration
+# Each service (backend, frontend) is deployed as a separate Railway service
+# pointing to the corresponding subdirectory.
+#
+# See: https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "DOCKERFILE"
+
+# Backend service — set this in the Railway UI under "Service Settings → Root Directory → Backend"
+# Frontend service — set Root Directory to "Frontend"
