@@ -28,10 +28,7 @@ COPY src ./src
 COPY package.json ./
 
 # Data directory for SQLite volume mount
-RUN mkdir -p /data && chown node:node /data
-
-# Run as non-root
-USER node
+RUN mkdir -p /data
 
 EXPOSE 3000
 
