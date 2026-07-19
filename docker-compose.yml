@@ -22,7 +22,10 @@ services:
       # SQL seed file mounted so init_db.js can find it on first run
       - ./charusat_internship_portal.sql:/app/charusat_internship_portal.sql:ro
     networks:
-      - placestar
+      placestar:
+        aliases:
+          - place-star-backend.railway.internal
+
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
       interval: 30s
