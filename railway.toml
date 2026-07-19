@@ -1,11 +1,15 @@
-# Railway project configuration
-# Each service (backend, frontend) is deployed as a separate Railway service
-# pointing to the corresponding subdirectory.
+# PlaceStar Monorepo — Railway Deployment Guide
 #
-# See: https://docs.railway.app/reference/config-as-code
-
-[build]
-builder = "DOCKERFILE"
-
-# Backend service — set this in the Railway UI under "Service Settings → Root Directory → Backend"
-# Frontend service — set Root Directory to "Frontend"
+# This repo has TWO Railway services, each with its own railway.toml:
+#   Backend/railway.toml  — Node.js API
+#   Frontend/railway.toml — React (nginx)
+#
+# DO NOT configure builder here. Railway will find the correct
+# railway.toml once you set the Root Directory per service in the UI.
+#
+# Steps:
+#  1. Create a Railway project
+#  2. Add service 1 → GitHub repo → Root Directory: "Backend"
+#  3. Add service 2 → GitHub repo → Root Directory: "Frontend"
+#  4. Add a Volume to the Backend service, mount at /data
+#  5. Set env vars on Backend service (see Backend/.env.example)

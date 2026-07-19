@@ -3,8 +3,8 @@ services:
   # ─── Backend ─────────────────────────────────────────────────────────────────
   backend:
     build:
-      context: .                          # repo root — so Dockerfile can access ./charusat_internship_portal.sql
-      dockerfile: Backend/Dockerfile
+      context: ./Backend              # matches Railway's root directory setting
+      dockerfile: Dockerfile
     container_name: placestar-backend
     restart: unless-stopped
     environment:
@@ -19,6 +19,8 @@ services:
       EMAIL_PASS: ${EMAIL_PASS:-}
     volumes:
       - sqlite_data:/data
+      # SQL seed file mounted so init_db.js can find it on first run
+      - ./charusat_internship_portal.sql:/app/charusat_internship_portal.sql:ro
     networks:
       - placestar
     healthcheck:
