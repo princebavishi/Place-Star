@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -34,7 +35,7 @@ const Dashboard = () => {
     const fetchExams = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://'+ import.meta.env.VITE_DB_HOST +'/api/faculty/scheduledQuizzes', {
+        const response = await axios.get(`${API_BASE}/api/faculty/scheduledQuizzes`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +55,7 @@ const Dashboard = () => {
     const qHistory = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://'+ import.meta.env.VITE_DB_HOST +'/api/faculty/recentExam/details', {
+        const response = await axios.get(`${API_BASE}/api/faculty/recentExam/details`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -89,7 +90,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get('http://'+ import.meta.env.VITE_DB_HOST +'/api/faculty/dashboard/examsConductedCount/examScdeduled', {
+        const response = await axios.get(`${API_BASE}/api/faculty/dashboard/examsConductedCount/examScdeduled`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

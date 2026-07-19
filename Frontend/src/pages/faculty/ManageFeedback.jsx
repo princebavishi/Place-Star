@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -27,7 +28,7 @@ const ManageFeedback = () => {
     const fetchExams = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://'+ import.meta.env.VITE_DB_HOST +'/api/faculty/facultyQuizzes/feedback', {
+        const response = await axios.get(`${API_BASE}/api/faculty/facultyQuizzes/feedback`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

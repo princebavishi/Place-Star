@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -22,7 +23,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/quizzes/${QuizID}/start`, null, {
+      const response = await axios.post(`${API_BASE}/api/student/quizzes/${QuizID}/start`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,7 +74,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/upcomingExams`, {
+        const response = await axios.get(`${API_BASE}/api/student/upcomingExams`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -92,7 +93,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/recentExams`, {
+        const response = await axios.get(`${API_BASE}/api/student/recentExams`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -117,7 +118,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/dashboard/upcomingExamsCount/examClearedCount`, {
+        const response = await axios.get(`${API_BASE}/api/student/dashboard/upcomingExamsCount/examClearedCount`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

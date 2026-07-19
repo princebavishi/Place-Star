@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -18,7 +19,7 @@ const ViewData = () => {
     const fetchsubmitioninfo = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://` + import.meta.env.VITE_DB_HOST + `/api/faculty/quizzes/${QuizID}/allStudentResults`, {
+        const response = await axios.get(`${API_BASE}/api/faculty/quizzes/${QuizID}/allStudentResults`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

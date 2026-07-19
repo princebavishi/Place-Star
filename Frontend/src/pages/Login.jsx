@@ -1,3 +1,4 @@
+import API_BASE from '../api.js';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -43,7 +44,7 @@ function Login() {
     handleLoggedInUser();
     // console.log(import.meta.env.VITE_DB_HOST);
     try {
-      const response = await axios.post('http://' + import.meta.env.VITE_DB_HOST + '/api/login', {
+      const response = await axios.post(`${API_BASE}/api/login`, {
         username,
         password,
       });
@@ -88,7 +89,7 @@ function Login() {
 
       try {
 
-        const response = await axios.post('http://' + import.meta.env.VITE_DB_HOST + '/api/register/verifyOTP', OTPVerifyData);
+        const response = await axios.post(`${API_BASE}/api/register/verifyOTP`, OTPVerifyData);
         if (response.status == 200) {
           toast.success("Account Verified Successfully !")
           handleOTPModalToggle();

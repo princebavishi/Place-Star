@@ -36,7 +36,7 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile
       args:
-        VITE_DB_HOST: localhost
+        VITE_API_URL: http://localhost
     container_name: placestar-frontend
     restart: unless-stopped
     ports:

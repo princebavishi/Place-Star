@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -16,7 +17,7 @@ const ViewGivenQuiz = () => {
   const fetchQuiz = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/quizDetails/${QuizID}`, {
+      const response = await axios.get(`${API_BASE}/api/student/quizDetails/${QuizID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

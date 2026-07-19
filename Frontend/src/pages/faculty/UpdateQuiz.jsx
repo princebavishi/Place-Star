@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -37,7 +38,7 @@ const UpdateQuiz = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/faculty/quizDetails/${QuizID}`, {
+        const response = await axios.get(`${API_BASE}/api/faculty/quizDetails/${QuizID}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -156,7 +157,7 @@ const UpdateQuiz = () => {
     // console.log(UpdateData);
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage
     try {
-      const response = await axios.put(`http://`+ import.meta.env.VITE_DB_HOST +`/api/faculty/updateQuiz/${QuizID}`, UpdateData, {
+      const response = await axios.put(`${API_BASE}/api/faculty/updateQuiz/${QuizID}`, UpdateData, {
         headers: {
           Authorization: `Bearer ${token}` // Add the token to the Authorization header
         }

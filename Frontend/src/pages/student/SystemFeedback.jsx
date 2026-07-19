@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -13,7 +14,7 @@ const Systemfeedback = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/feedback`,{feedback, email},{
+      const response = await axios.post(`${API_BASE}/api/student/feedback`,{feedback, email},{
         headers: {
           Authorization: `Bearer ${token}`,
         },

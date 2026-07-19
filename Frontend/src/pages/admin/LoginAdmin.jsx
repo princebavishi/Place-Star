@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +32,7 @@ function LoginAdmin() {
     e.preventDefault();
     handleLoggedInUser();
     try {
-      const response = await axios.post('http://'+ import.meta.env.VITE_DB_HOST +'/api/login', {
+      const response = await axios.post(`${API_BASE}/api/login`, {
         username,
         password
 

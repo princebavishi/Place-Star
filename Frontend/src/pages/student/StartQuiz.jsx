@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -22,7 +23,7 @@ const StartQuiz = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const { data: { examDetails, questions } } = await axios.get(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/examQuestions/${QuizID}`, {
+        const { data: { examDetails, questions } } = await axios.get(`${API_BASE}/api/student/examQuestions/${QuizID}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         
@@ -102,7 +103,7 @@ const StartQuiz = () => {
     try {
       const token = localStorage.getItem('token');
       // console.log(token);
-      const response = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/quizFeedback/${QuizID}/`,{ExamFeedback},{
+      const response = await axios.post(`${API_BASE}/api/student/quizFeedback/${QuizID}/`,{ExamFeedback},{
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -134,7 +135,7 @@ const StartQuiz = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/quizzes/${QuizID}/results`,null, {
+      const response = await axios.post(`${API_BASE}/api/student/quizzes/${QuizID}/results`,null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -151,7 +152,7 @@ const StartQuiz = () => {
   const submitQuiz = async (data) => {
 
     try {
-      const { status, data: responseData } = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/student/quizzes/${QuizID}/submit`, data, {
+      const { status, data: responseData } = await axios.post(`${API_BASE}/api/student/quizzes/${QuizID}/submit`, data, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       if (status === 200) {

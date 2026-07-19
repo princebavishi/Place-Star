@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useState, useEffect } from 'react';
 import Questions from '../../components/Questions';
 import axios from 'axios';
@@ -114,7 +115,7 @@ const AddQuiz = () => {
     const token = localStorage.getItem('token'); // Retrieve the token from localStorage
 
     try {
-      const response = await axios.post(`http://`+ import.meta.env.VITE_DB_HOST +`/api/faculty/createNewQuiz`, quizData, {
+      const response = await axios.post(`${API_BASE}/api/faculty/createNewQuiz`, quizData, {
         headers: {
           Authorization: `Bearer ${token}` // Add the token to the Authorization header
         }

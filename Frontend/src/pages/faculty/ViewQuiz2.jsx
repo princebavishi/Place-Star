@@ -1,3 +1,4 @@
+import API_BASE from '../../api.js';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -29,7 +30,7 @@ const ViewQuiz = () => {
     const fetchQuiz = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://` + import.meta.env.VITE_DB_HOST + `/api/faculty/quizDetails/${QuizID}`, {
+        const response = await axios.get(`${API_BASE}/api/faculty/quizDetails/${QuizID}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -55,7 +56,7 @@ const ViewQuiz = () => {
   const handleDeleteQuiz = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://` + import.meta.env.VITE_DB_HOST + `/api/faculty/deleteQuiz/${QuizID}`, {
+      const response = await axios.delete(`${API_BASE}/api/faculty/deleteQuiz/${QuizID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

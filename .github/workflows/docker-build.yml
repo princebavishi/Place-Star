@@ -51,7 +51,7 @@ jobs:
           context: ./Frontend
           push: true
           build-args: |
-            VITE_DB_HOST=${{ secrets.VITE_DB_HOST }}
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
           tags: |
             ${{ env.DOCKERHUB_USERNAME }}/placestar-frontend:latest
             ${{ env.DOCKERHUB_USERNAME }}/placestar-frontend:${{ github.sha }}

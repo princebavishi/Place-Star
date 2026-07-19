@@ -1,3 +1,4 @@
+import API_BASE from '../api.js';
 import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { RiLockPasswordLine } from 'react-icons/ri';
@@ -40,7 +41,7 @@ const RegisterFaculty = () => {
         const jsonData = getFormData();
         console.log(jsonData);
 
-        const response = await axios.post('http://' + import.meta.env.VITE_DB_HOST + '/api/register/register_faculty', jsonData);
+        const response = await axios.post(`${API_BASE}/api/register/register_faculty`, jsonData);
         if (response.status == 200) {
 
           toast.success("Register Successfully !");
@@ -98,7 +99,7 @@ const RegisterFaculty = () => {
 
       try {
 
-        const response = await axios.post('http://' + import.meta.env.VITE_DB_HOST + '/api/register/verifyOTP', OTPVerifyData);
+        const response = await axios.post(`${API_BASE}/api/register/verifyOTP`, OTPVerifyData);
         if (response.status == 200) {
           toast.success("Verified Successfully !")
           navigate("/")
